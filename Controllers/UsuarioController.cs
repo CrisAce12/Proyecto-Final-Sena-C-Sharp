@@ -167,5 +167,18 @@ namespace Proyecto.Controllers
 
         }
 
+        public ActionResult Details(int id)
+        {
+
+            using (var db = new inventarioEntities1())
+            {
+
+                var finduser = db.usuario.Find(id);
+                return View(finduser);
+
+            }
+
+        }
+
     }
 }

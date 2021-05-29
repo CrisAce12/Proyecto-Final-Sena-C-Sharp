@@ -277,18 +277,15 @@
     <Content Include="Views\Usuario\index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Cliente\index.cshtml" />
     <Content Include="Views\Cliente\Create.cshtml" />
-    <Content Include="Views\Cliente\Delete.cshtml" />
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Proveedor\index.cshtml" />
     <Content Include="Views\Proveedor\Create.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
-    <Content Include="Views\Proveedor\Delete.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
@@ -299,14 +296,13 @@
     <Content Include="Views\Compra\ListarUsuarios.cshtml" />
     <Content Include="Views\Compra\ListarClientes.cshtml" />
     <Content Include="Views\Compra\Create.cshtml" />
-    <Content Include="Views\Compra\Delete.cshtml" />
     <Content Include="Views\Compra\Edit.cshtml" />
     <Content Include="Views\Producto_Compra\Index.cshtml" />
     <Content Include="Views\Producto_Compra\ListarProductos.cshtml" />
     <Content Include="Views\Producto_Compra\Create.cshtml" />
     <Content Include="Views\Producto_Compra\Edit.cshtml" />
-    <Content Include="Views\Producto_Compra\Delete.cshtml" />
     <Content Include="Views\Producto_Compra\Details.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

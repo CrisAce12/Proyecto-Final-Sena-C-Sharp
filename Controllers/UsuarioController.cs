@@ -5,12 +5,14 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using System.Web.Security;
 
 namespace Proyecto.Controllers
 {
     public class UsuarioController : Controller
     {
         // GET: Usuario
+        [Authorize]
         public ActionResult Index()
         {
 
@@ -177,6 +179,51 @@ namespace Proyecto.Controllers
                 return View(finduser);
 
             }
+
+        }
+
+        public ActionResult Login(string message = "")
+        {
+
+            ViewBag.Message = message;
+            return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string user, string password)
+        {
+
+            string passwordEncrip = UsuarioController.HashSHA1(password);
+            using (var db = new inventarioEntities1())
+            {
+
+                var userLogin = db.usuario.FirstOrDefault(e => e.email == user && e.password == passwordEncrip);
+                if (userLogin != null)
+                {
+
+                    FormsAuthentication.SetAuthCookie(userLogin.email, true);
+                    Session["User"] = userLogin;
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+
+                    return Login("Verifique sus datos");
+
+                }
+            }
+
+        }
+
+        [Authorize]
+        public ActionResult CloseSession()
+        {
+
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index","Home");
 
         }
 

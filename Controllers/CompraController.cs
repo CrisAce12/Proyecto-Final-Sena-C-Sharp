@@ -7,40 +7,64 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class ProductoController : Controller
+    public class CompraController : Controller
     {
-        // GET: Producto
+        // GET: Compra
         public ActionResult Index()
         {
 
             using (var db = new inventarioEntities1())
             {
 
-                return View(db.producto.ToList());
+                return View(db.compra.ToList());
 
             }
 
         }
 
-        public static string NombreProveedor(int? idProveedor)
+        public static string NombreUsuario(int? idUsuario)
         {
 
             using (var db = new inventarioEntities1())
             {
 
-                return db.proveedor.Find(idProveedor).nombre;
+                return db.usuario.Find(idUsuario).nombre;
 
             }
 
         }
 
-        public ActionResult ListarProveedores()
+        public ActionResult ListarUsuarios(int? idUsuario)
+        {
+
+            using(var db = new inventarioEntities1())
+            {
+
+                return PartialView(db.usuario.ToList());
+
+            }
+
+        }
+
+        public static string NombreCliente(int? idCliente)
         {
 
             using (var db = new inventarioEntities1())
             {
 
-                return PartialView(db.proveedor.ToList());
+                return db.cliente.Find(idCliente).nombre;
+
+            }
+
+        }
+        
+        public ActionResult ListarClientes(int? idCliente)
+        {
+
+            using (var db = new inventarioEntities1())
+            {
+
+                return PartialView(db.cliente.ToList());
 
             }
 
@@ -55,7 +79,7 @@ namespace Proyecto.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(producto producto)
+        public ActionResult Create(compra compra)
         {
 
             if (!ModelState.IsValid)
@@ -67,7 +91,7 @@ namespace Proyecto.Controllers
                 using (var db = new inventarioEntities1())
                 {
 
-                    db.producto.Add(producto);
+                    db.compra.Add(compra);
                     db.SaveChanges();
                     return RedirectToAction("Index");
 
@@ -77,7 +101,7 @@ namespace Proyecto.Controllers
             catch (Exception ex)
             {
 
-                ModelState.AddModelError("", "Error " + ex);
+                ModelState.AddModelError("", "error" + ex);
                 return View();
 
             }
@@ -87,11 +111,11 @@ namespace Proyecto.Controllers
         public ActionResult Edit(int id)
         {
 
-            using(var db = new inventarioEntities1())
+            using (var db = new inventarioEntities1())
             {
 
-                producto productoEdit = db.producto.Where(a => a.id == id).FirstOrDefault();
-                return View(productoEdit);
+                compra compraEdit = db.compra.Where(a => a.id == id).FirstOrDefault();
+                return View(compraEdit);
 
             }
 
@@ -99,7 +123,7 @@ namespace Proyecto.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(producto productoEdit)
+        public ActionResult Edit(compra compraEdit)
         {
 
             try
@@ -108,12 +132,11 @@ namespace Proyecto.Controllers
                 using (var db = new inventarioEntities1())
                 {
 
-                    var oldProduct = db.producto.Find(productoEdit.id);
-                    oldProduct.nombre = productoEdit.nombre;
-                    oldProduct.cantidad = productoEdit.cantidad;
-                    oldProduct.descripcion = productoEdit.descripcion;
-                    oldProduct.percio_unitario = productoEdit.percio_unitario;
-                    oldProduct.id_proveedor = productoEdit.id_proveedor;
+                    var oldCompra = db.compra.Find(compraEdit.id);
+                    oldCompra.fecha = compraEdit.fecha;
+                    oldCompra.total = compraEdit.total;
+                    oldCompra.id_usuario = compraEdit.id_usuario;
+                    oldCompra.id_cliente = compraEdit.id_cliente;
                     db.SaveChanges();
                     return RedirectToAction("Index");
 
@@ -123,7 +146,7 @@ namespace Proyecto.Controllers
             catch (Exception ex)
             {
 
-                ModelState.AddModelError("","Error "+ex);
+                ModelState.AddModelError("","Error"+ex);
                 return View();
 
             }
@@ -139,8 +162,8 @@ namespace Proyecto.Controllers
                 using (var db = new inventarioEntities1())
                 {
 
-                    producto producto = db.producto.Find(id);
-                    db.producto.Remove(producto);
+                    compra compra = db.compra.Find(id);
+                    db.compra.Remove(compra);
                     db.SaveChanges();
                     return RedirectToAction("Index");
 
@@ -150,7 +173,7 @@ namespace Proyecto.Controllers
             catch (Exception ex)
             {
 
-                ModelState.AddModelError("","Error "+ex);
+                ModelState.AddModelError("",""+ex);
                 return View();
 
             }
@@ -163,11 +186,12 @@ namespace Proyecto.Controllers
             using (var db = new inventarioEntities1())
             {
 
-                return View(db.producto.Find(id));
+                return View(db.compra.Find(id));
 
             }
 
         }
 
     }
+
 }

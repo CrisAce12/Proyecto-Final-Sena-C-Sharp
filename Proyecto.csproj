@@ -303,6 +303,7 @@
     <Content Include="Views\Producto_Compra\Edit.cshtml" />
     <Content Include="Views\Producto_Compra\Details.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Proveedor\uploadCSV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

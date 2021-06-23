@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using System.IO;
+
 
 namespace Proyecto.Controllers
 {
@@ -167,6 +169,24 @@ namespace Proyecto.Controllers
 
             }
 
+        }
+
+        public ActionResult Reporte()
+        {
+            var db = new inventarioEntities1();
+
+                var query = from tabProvedor in db.proveedor
+                            join tabProducto in db.producto on tabProvedor.id equals tabProducto.id_proveedor
+                            select new Reporte
+                            {
+                                nombreProveedor = tabProvedor.nombre,
+                                telefonoProveedor = tabProvedor.telefono,
+                                direccionProveedor = tabProvedor.direccion,
+                                nombreProducto = tabProducto.nombre,
+                                percioProducto = tabProducto.percio_unitario
+                            };
+                return View(query);
+            
         }
 
     }

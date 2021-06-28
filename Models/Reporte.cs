@@ -19,4 +19,5 @@ namespace Proyecto.Models
         public int? percioProducto { set; get; }
 
     }
+
 }

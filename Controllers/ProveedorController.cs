@@ -173,7 +173,7 @@ namespace Proyecto.Controllers
         }
 
         [HttpPost]
-        public ActionResult returnCSV(HttpPostedFile fileForm)
+        public ActionResult uploadCSV(HttpPostedFileBase fileForm)
         {
 
             string filePath = string.Empty;
@@ -183,7 +183,7 @@ namespace Proyecto.Controllers
 
                 string path = Server.MapPath("~/Uploads/");
 
-                if (Directory.Exists(path))
+                if (!Directory.Exists(path))
                 {
 
                     Directory.CreateDirectory(path);
@@ -227,7 +227,7 @@ namespace Proyecto.Controllers
 
             }
 
-            return View("Index");
+            return View("");
 
         }
 

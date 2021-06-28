@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
 using System.Web.Security;
+using System.IO;
 
 namespace Proyecto.Controllers
 {
@@ -224,6 +225,73 @@ namespace Proyecto.Controllers
 
             FormsAuthentication.SignOut();
             return RedirectToAction("Index","Home");
+
+        }
+
+        public ActionResult uploadCSV()
+        {
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult uploadCSV(HttpPostedFileBase fileForm)
+        {
+
+            string filePath = string.Empty;
+
+            if (fileForm != null)
+            {
+
+                string path = Server.MapPath("~/Uploads/");
+
+                if (!Directory.Exists(path))
+                {
+
+                    Directory.CreateDirectory(path);
+
+                }
+
+                filePath = path + Path.GetFileName(fileForm.FileName);
+                string extension = Path.GetExtension(fileForm.FileName);
+
+                fileForm.SaveAs(filePath);
+
+                string csvData = System.IO.File.ReadAllText(filePath);
+
+                foreach (string row in csvData.Split('\n'))
+                {
+
+                    if (!string.IsNullOrEmpty(row))
+                    {
+
+                        var newUsuario = new usuario
+                        {
+
+                            nombre = row.Split(';')[0],
+                            apellido = row.Split(';')[1],
+                            fecha_nacimiento = DateTime.Parse(row.Split(';')[2]),
+                            email = row.Split(';')[3],
+                            password = row.Split(';')[4],
+
+                        };
+
+                        using (var db = new inventarioEntities1())
+                        {
+
+                            db.usuario.Add(newUsuario);
+                            db.SaveChanges();
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            return View("");
 
         }
 

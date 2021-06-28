@@ -7,7 +7,7 @@
 <h2>Proveedor</h2>
 
 <p>
-    @Html.ActionLink("Crear Nuevo Proveedor", "Create")
+    @Html.ActionLink("Crear Proveedor", "Create")
 </p>
 <table class="table">
     <tr>
@@ -26,7 +26,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.nombre)

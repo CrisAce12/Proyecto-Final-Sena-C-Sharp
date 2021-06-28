@@ -162,5 +162,23 @@ namespace Proyecto.Controllers
 
         }
 
+        public ActionResult Reporte()
+        {
+            var db = new inventarioEntities1();
+
+            var query = from tabCompra in db.compra
+                        join tabCliente in db.cliente on tabCompra.id_cliente equals tabCliente.id
+                        select new Reporte
+                        {
+                            nombreCliente = tabCliente.nombre,
+                            emailCliente = tabCliente.email,
+                            idCompra = tabCompra.id,
+                            totalCompra = tabCompra.total,
+
+                        };
+            return View(query);
+
+        }
+
     }
 }

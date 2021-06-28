@@ -307,6 +307,7 @@
     <Content Include="Views\Proveedor\uploadCSV.cshtml" />
     <Content Include="Views\Producto\Reporte.cshtml" />
     <Content Include="Views\Usuario\uploadCSV.cshtml" />
+    <Content Include="Views\Cliente\Reporte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

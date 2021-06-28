@@ -289,6 +289,8 @@ namespace Proyecto.Controllers
 
                 }
 
+                return RedirectToAction("Index");
+
             }
 
             return View("");

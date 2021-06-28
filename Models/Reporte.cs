@@ -18,6 +18,14 @@ namespace Proyecto.Models
 
         public int? percioProducto { set; get; }
 
+        public String nombreCliente { set; get; }
+
+        public String emailCliente { set; get; }
+
+        public int? idCompra { set; get; }
+        
+        public int? totalCompra { set; get; }
+
     }
 
 }
